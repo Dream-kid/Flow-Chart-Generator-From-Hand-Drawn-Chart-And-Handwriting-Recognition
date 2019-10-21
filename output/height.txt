@@ -1,0 +1,7 @@
+height
+para-350
+para1 - 350
+para2 - 350
+para6 - 350
+pro1- 300
+temp-100 /not working
