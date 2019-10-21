@@ -1,0 +1,12 @@
+git init
+git add .
+git status
+git commit -am"new commit1"
+git remote add origin git@github.com:Dream-kid/Hand-drawn.git
+git push -u origin master
+
+
+
+git config --global user.name "dream_kid"
+
+git config --global user.email "sourovchakraborty420@gmail.com"
