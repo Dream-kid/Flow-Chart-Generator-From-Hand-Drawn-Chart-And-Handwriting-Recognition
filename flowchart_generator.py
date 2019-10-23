@@ -6,8 +6,11 @@ import numpy as np
 from PIL import Image
 import pytesseract
 import tkinter as tk
-
-
+import os
+import shutil
+from docx.shared import Inches
+from docx import Document
+document = Document()
 thickness = 10
 #to extract text from image
 def extract_text(image,imagename):#variable , name of file
@@ -76,9 +79,10 @@ class ShapeDetector:
         return shape
 #to turn image that was read using openCv (bgr) to (rgb)     
 def cv2mat(imagename , imagevar):
-    lol='flowchart/output/'
-    lol=lol+imagename
-    imagename=lol
+    #imagename='temp'
+    #lol=''
+    #lol=lol+imagename
+    #imagename=lol
     cv2.imwrite(imagename,imagevar) 
     bgr_img = cv2.imread(imagename)  #reading image using openCV
     b,g,r = cv2.split(bgr_img)       # get b,g,r
@@ -112,10 +116,40 @@ def show_images(images, cols = 1, titles = None):
         a.set_title(title)
     fig.set_size_inches(np.array(3*fig.get_size_inches()) * n_images)
     plt.show()
-    
+def remove11():
+    try: 
+        os.remove("output.jpg")
+    except: pass    
+def copy11(temp):
+    st="flowchart/store/"+temp
+    shutil.copy("output.jpg",st)
+def edge_cut(outputname):
+    img = cv2.imread(outputname) 
+    rsz_img = cv2.resize(img, None, fx=0.25, fy=0.25) # resize since image is huge
+    gray = cv2.cvtColor(rsz_img, cv2.COLOR_BGR2GRAY) # convert to grayscale
+
+# threshold to get just the signature
+    retval, thresh_gray = cv2.threshold(gray, thresh=100, maxval=255, type=cv2.THRESH_BINARY)
+
+# find where the signature is and make a cropped region
+    points = np.argwhere(thresh_gray==0) # find where the black pixels are
+    points = np.fliplr(points) # store them in x,y coordinates instead of row,col indices
+    x, y, w, h = cv2.boundingRect(points) # create a rectangle around those points
+   # x, y, w, h = x-2, y-2, w+2, h+2 # make the box a little bigger
+    crop = gray[y:y+h, x:x+w] # create a cropped region of the gray image
+
+# get the thresholded crop
+    retval, thresh_crop = cv2.threshold(crop, thresh=200, maxval=255, type=cv2.THRESH_BINARY)
+
+# display
+                #cv2.imshow("Cropped and thresholded image", thresh_crop) 
+    cv2.imwrite(outputname,thresh_crop)   
+  
 #turn drawn flowchart to digital version
+    
 def flowchart(image,outputname):
     white = 255*np.ones_like(image)
+    white1 = 255*np.ones_like(image)
     white2 = image.copy() 
     blurred = cv2.GaussianBlur(image, (5,5), 0)
     #resize the image
@@ -146,8 +180,9 @@ def flowchart(image,outputname):
     cnts,hierarchy = cv2.findContours(MORPH_OPEN.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
     #cnts = cnts[0] if imutils.is_cv2() else cnts[1]
     sd = ShapeDetector()
-    
     # loop over the contours
+    pp="1.jpg"
+    cnt12=0
     for i in range(len(cnts)):
         # compute the center of the contour, then detect the name of the
         # shape using only the contour
@@ -155,6 +190,7 @@ def flowchart(image,outputname):
         if len(cnts[i]) >= 5:
           
             #print('ok')
+            white = 255*np.ones_like(image)
             area = cv2.contourArea(c)
             (z,q),(MA,ma),angle = cv2.fitEllipse(c)
             peri = cv2.arcLength(c, True)
@@ -166,6 +202,7 @@ def flowchart(image,outputname):
             w = int(w*ratio)
             h = int(h*ratio)
             a = int((h/2)*1)
+    
             if ( int(ma) < int(0.5*resized.shape[0]) & int(MA) < int(0.5*resized.shape[1]) )or area > 0.001*(image.shape[0]*image.shape[1]):
                 M = cv2.moments(c)
                 cX = int((M["m10"] / (M["m00"]) )* ratio)
@@ -181,41 +218,69 @@ def flowchart(image,outputname):
                 cv2.putText(image, shape, (cX+int(w/2), cY), cv2.FONT_HERSHEY_SIMPLEX,3, (0, 0, 0), 5)
                 cropped = white2[y:y+h, x:x+w]           
     #            print(extract_text(cropped,'cropped.jpg'))
+                mark=0
                 cv2.putText(white, extract_text(cropped,'cropped.jpg'), (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
+                cv2.putText(white1, extract_text(cropped,'cropped.jpg'), (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
+                cnt12=cnt12+1
                 if shape == "rectangle":
+                    
                     #(x,y) top left corner , (x+w,y+h) bottom right corner
                     draw = cv2.rectangle(white,(x,y),(x+w,y+h),(255,0,0),thickness)
+                    draw = cv2.rectangle(white1,(x,y),(x+w,y+h),(255,0,0),thickness)
                 elif shape == "Diamond":
                     pts = np.array([[cX,cY-int(h/2)],[cX+int(w/2),cY],[cX,cY+int(h/2)],[cX-int(w/2),cY]], np.int32)
                     pts = pts.reshape((-1,1,2))
                     draw = cv2.polylines(white,[pts],True,(255,0,0),thickness)
+                    draw = cv2.polylines(white1,[pts],True,(255,0,0),thickness)
                 elif shape == "parallelogram":
                     pts = np.array([[int(cX-(w/2)+a),int(cY-(h/2))],[int(cX+(w/2)+a),int(cY-(h/2))],[int(cX+(w/2)-a),int(cY+(h/2))],[int(cX-(w/2)-a),int(cY+(h/2))]], np.int32)
                     pts = pts.reshape((-1,1,2))
                     draw = cv2.polylines(white,[pts],True,(255,0,0),thickness)
+                    draw = cv2.polylines(white1,[pts],True,(255,0,0),thickness)
                 elif shape == "ellipse":
                     # center location, (major axis length, minor axis length)
                     #next angle , start angle,end angle ,color,thickness(when -1 fills ellipse)
                     draw = cv2.ellipse(white,(cX,cY),(int(w/2),int(h/2)),0,0,360,255,thickness)
+                    draw = cv2.ellipse(white1,(cX,cY),(int(w/2),int(h/2)),0,0,360,255,thickness)
                 elif shape == "arrow":
                     draw = cv2.line(white,(x,y+h),(x,y),(255,0,0),5)
+                    draw = cv2.line(white1,(x,y+h),(x,y),(255,0,0),5)
                     draw = cv2.line(white,(x,y+h),(x+int(h/6),y+h-int(h/6)),(255,0,0),thickness)
+                    draw = cv2.line(white1,(x,y+h),(x+int(h/6),y+h-int(h/6)),(255,0,0),thickness)
                     draw = cv2.line(white,(x,y+h),(x-int(h/6),y+h-int(h/6)),(255,0,0),thickness)
+                    draw = cv2.line(white1,(x,y+h),(x-int(h/6),y+h-int(h/6)),(255,0,0),thickness)
                 else:
                     draw = cv2.rectangle(white,(x,y),(x+w,y+h),(255,0,0),thickness)
+                    draw = cv2.rectangle(white1,(x,y),(x+w,y+h),(255,0,0),thickness)
+                #outputname=outputname+'0'
+                cv2mat(outputname , white) 
+                edge_cut(outputname)
+                
+               # runner.add_picture('output.jpg',width=Inches(imgwidth),height=Inches(imgheight)) 
+                copy11(pp)
+                pp="0"+pp
+                
+                #cv2.waitKey(0)
+                #show_images(images, cols = 2, titles = None)               
+                # cv2.destroyAllWindows()
+                #copy11()
+                #remove11()
         else:
             cv2.drawContours(image,cnts,-1,(0,0,0),-1)
             	 #show the output image
+    #document.save('flowchart/output/demo.docx')             
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
     cv2.imshow("Image", image)
     cv2.namedWindow('white', cv2.WINDOW_NORMAL)
-    cv2.imshow("white", white)
+    cv2.imshow("white", white1)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
-    images = [cv2mat(outputname , image) ,cv2mat(outputname , white) ]
+     
+    images = [cv2mat(outputname , image) ,cv2mat(outputname , white1) ]
     show_images(images, cols = 2, titles = None)
-
+    st="flowchart/output/output.jpg"
+    shutil.copy("output.jpg",st)
+    return cnt12
                 
 
 def call2(name):
@@ -224,7 +289,10 @@ def call2(name):
     #print(lol)
     #lol='input.jpg'
     img = cv2.imread(lol)    
-    flowchart(img,'output.jpg')
+    return flowchart(img,'output.jpg')
 
-  
-       
+"""  
+if __name__== "__main__" :
+    temp=call2('input2.jpg')
+    dell12(temp)   
+"""

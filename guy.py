@@ -25,8 +25,8 @@ def database():
        call1(name1)
        dell()
    else:
-       call2(name1)
-       dell1() 
+       temp=call2(name1)
+       dell12(temp) 
    
              
 label_0 = Label(root, text="Hand Drawn",width=20,font=("bold", 20))
