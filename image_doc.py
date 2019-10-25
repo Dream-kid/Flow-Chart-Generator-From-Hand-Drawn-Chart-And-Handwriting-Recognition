@@ -4,12 +4,13 @@ Created on Mon Oct 21 19:28:34 2019
 
 @author: Imsourav
 """
+import shutil
 from PIL import Image
 import glob
 from docx.shared import Inches
 from docx import Document
 import os
-def dell12(num1):    
+def dell12(num1,output):    
     document = Document()
     
     document.add_heading('Hand Drawn', 0)
@@ -42,6 +43,16 @@ def dell12(num1):
         
         runner.add_picture(filename,width=Inches(imgwidth),height=Inches(imgheight))
         #os.remove(filename)
-    document.save('flowchart/output/demo.docx')
+    #output=output.replace('/', '\')    
+    document.save(output)
+    
+    """
+    st =  output
+    st = st[:-4]
+    st=st+"jpg"
+    print(st)
+    print(output)
+    shutil.copy("output.jpg",st)
+    """
 #if __name__== "__main__" :
     #dell12(1)

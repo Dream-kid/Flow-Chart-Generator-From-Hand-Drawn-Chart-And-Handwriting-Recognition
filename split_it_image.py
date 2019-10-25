@@ -74,7 +74,7 @@ def crop(infile,temp):
 if __name__== "__main__" :
     temp=".jpg"
     cnt=1
-    shutil.copy("Demo/images/para245.jpg","sou.jpg")
+    shutil.copy("Demo/images/story11.jpg","sou.jpg")
     while True:
         temp1=str(cnt)+temp
         a=crop('sou.jpg',temp1)

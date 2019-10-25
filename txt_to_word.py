@@ -1,7 +1,7 @@
 
 from docx.shared import Inches
 from docx import Document
-def dell():    
+def dell(output):    
     document = Document()
     
     document.add_heading('Hand Drawn', 0)
@@ -12,4 +12,4 @@ def dell():
                print(line)       
                document.add_paragraph(line)
                #document.add_paragraph('first item in ordered list', style='ListNumber')
-    document.save('output/demo.docx')
+    document.save(output)

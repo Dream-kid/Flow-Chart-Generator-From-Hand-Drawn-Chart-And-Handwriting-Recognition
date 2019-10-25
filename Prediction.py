@@ -12,7 +12,7 @@ from keras.utils import plot_model
 from Spell import correction_list
 
 
-def how(gd):
+def how(gd,output):
 	#l_model, l_model_predict = line_model()
 	#with open('line_model_predict.json', 'w') as f:
 	#	f.write(l_model_predict.to_json())
@@ -73,5 +73,8 @@ def how(gd):
     f1.write("\n")
     f1.close()
 
-    
+    f1= open(output,"a")
+    f1.write(text3)
+    f1.write("\n")
+    f1.close()
    

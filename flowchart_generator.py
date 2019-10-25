@@ -284,15 +284,14 @@ def flowchart(image,outputname):
                 
 
 def call2(name):
-    lol='flowchart/images/'
-    lol=lol+name
+   # lol='flowchart/images/'
+    #lol=lol+name
     #print(lol)
     #lol='input.jpg'
-    img = cv2.imread(lol)    
+    img = cv2.imread(name)    
     return flowchart(img,'output.jpg')
 
-"""  
+  
 if __name__== "__main__" :
     temp=call2('input2.jpg')
     dell12(temp)   
-"""
