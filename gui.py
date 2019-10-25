@@ -6,8 +6,8 @@ from tkinter.filedialog import askopenfilename
 from tkinter import filedialog
 from flowchart_generator import *
 from txt_to_word import *
+from split_it_image import *
 from image_doc import *
-from image_partition import *
 root = Tk()
 root.geometry('500x500')
 root.title("Hand Drawn")
@@ -87,11 +87,11 @@ def database():
        progress_var.set(progress)
        if i==28:
             if gender==1:
-                print('dddd')
-                print(name1)
+                #print('dddd')
+                #print(name1)
                 call1(str12,name1)
                 if name1[len(name1)-1] == 'x':
-                    print('ok')
+                   # print('ok')
                     dell(name1)
             else:
                 temp=call2(str12)
