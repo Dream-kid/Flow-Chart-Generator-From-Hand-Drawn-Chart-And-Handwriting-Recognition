@@ -10,7 +10,23 @@ import shutil
 from keras import backend as K
 from keras.utils import plot_model
 from Spell import correction_list
+import json
+import time
+import sys
 
+def split15(text):
+    cnt=0 
+    fo = open('words_dictionary.json','r')
+    data = json.load(fo)
+    word = text.split()
+    for temp in word:
+        #print(word)
+        searchKey=temp.lower()
+        if temp.isdigit():
+            cnt=cnt+1
+        elif searchKey in data.keys() and len(searchKey)>1:
+            cnt=cnt+1
+    return cnt  
 
 def how(gd,output):
 	#l_model, l_model_predict = line_model()
@@ -55,26 +71,34 @@ def how(gd,output):
     text3=	predict_image(l_model_predict, test_img, False)
     print('[Line model]: ' + text3)
     
+   
+  
+    cnt1=split15(text1)
+    cnt2=split15(text2)
+    cnt3=split15(text3)
+    print(cnt1,cnt2,cnt3)
+    f1= open("output/output3.txt","a")
+    if cnt3>=cnt1 and cnt3>=cnt2:
+        f1.write(text3)
+    elif cnt2>=cnt1 and cnt2>=cnt3:
+        f1.write(text2)
+    else:
+        f1.write(text1)   
+       
+    f1.write("\n")
+    f1.close()
     plt.show()
     shutil.rmtree('tmp')
     """
-    f1= open("output/output1.txt","a")
-    f1.write(text1)
-    f1.write("\n")
-    f1.close()
-   
     f1= open("output/output2.txt","a")
     f1.write(text2)
     f1.write("\n")
     f1.close()
-    """
+    
     f1= open("output/output3.txt","a")
     f1.write(text3)
     f1.write("\n")
     f1.close()
-
-    f1= open(output,"a")
-    f1.write(text3)
-    f1.write("\n")
-    f1.close()
-   
+    
+    """
+    

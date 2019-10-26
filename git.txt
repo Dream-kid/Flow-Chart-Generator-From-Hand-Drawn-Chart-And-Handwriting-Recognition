@@ -1,8 +1,8 @@
 git init
 git add .
 git status
-git commit -am"new commit1"
-git remote add origin git@github.com:Dream-kid/Hand-drawn.git
+git commit -am"new commit"
+git remote add origin https://Dream_kid@bitbucket.org/Dream_kid/hand_drawn.git
 git push -u origin master
 
 

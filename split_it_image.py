@@ -80,6 +80,9 @@ def crop(infile,temp,output):
 def call1(input1,output):
     open(output,'w').close()
     open('output/output3.txt', 'w').close()
+    open('output/output2.txt', 'w').close()
+    open('output/output1.txt', 'w').close()
+    open('output/output4.txt', 'w').close()
     temp=".jpg"
     cnt=1
     shutil.copy(input1,"sou.jpg")

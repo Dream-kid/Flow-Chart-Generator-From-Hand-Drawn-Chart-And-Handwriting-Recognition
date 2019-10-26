@@ -4,6 +4,7 @@ Created on Mon Oct 21 19:28:34 2019
 
 @author: Imsourav
 """
+
 import shutil
 from PIL import Image
 import glob

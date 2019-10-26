@@ -8,6 +8,8 @@ from flowchart_generator import *
 from txt_to_word import *
 from split_it_image import *
 from image_doc import *
+from PIL import Image
+import pytesseract
 root = Tk()
 root.geometry('500x500')
 root.title("Hand Drawn")
@@ -89,10 +91,24 @@ def database():
             if gender==1:
                 #print('dddd')
                 #print(name1)
-                call1(str12,name1)
+                try:
+                    call1(str12,name1)
+                except:
+                    print('no')
+                try:
+                    im = Image.open(str12)
+                    text = pytesseract.image_to_string(im, lang = 'eng')
+                    f1= open('output/output4.txt',"a")                                      
+                    f1.write(text)
+                    f1.close()   
+                except:
+                    print('no')
+                #print(text)
                 if name1[len(name1)-1] == 'x':
                    # print('ok')
-                    dell(name1)
+                    dell(name1,1)
+                else:
+                    dell(name1,2)
             else:
                 temp=call2(str12)
                 
