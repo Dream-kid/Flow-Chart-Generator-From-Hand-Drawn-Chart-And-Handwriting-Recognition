@@ -56,8 +56,18 @@ def crop(infile,temp,output):
             #print(imgheight2)
             if prev==imgheight2 and imgheight2>10:
                 print(i)
+                
+                im13 = Image.open(infile) 
+                width11, height11 = im13.size 
+                left = 1
+                top = 1
+                right = width11
+                bottom = i+15
+                im14 = im13.crop((left, top, right, bottom))   
+                #im1.show()
+                im14.save('0kalu.jpg')                                                
                 im4 = Image.open(infile)
-                im4 = im4.crop((1,i,imgwidth, imgheight)) 
+                im4 = im4.crop((1,i,imgwidth, imgheight))
                 im4.save('sou.jpg')
                 st="Demo/store/"+temp                
                 shutil.copy("0"+"kalu.jpg",st)
@@ -93,6 +103,6 @@ def call1(input1,output):
         if a==0:
             break
    
-    
+#call1('','')    
     
     

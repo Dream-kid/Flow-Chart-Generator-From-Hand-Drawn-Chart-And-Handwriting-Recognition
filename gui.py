@@ -120,6 +120,7 @@ def database():
            shutil.copy("output.jpg",name1)
    root.filename=''
    alert_popup('Completed','Your task has been completed..')
+   remove11()
    os.startfile(name1) 
       
 #def NewFile():
@@ -138,7 +139,17 @@ def About():
 def show():
      root.filename =  filedialog.askopenfilename(initialdir = "I:/handdrawn/draw/Demo/images",title = "Select file",filetypes = (("jpeg files","*.jpg"),("png files","*.png"),("all files","*.*")))
      str12=root.filename
-if __name__== "__main__" :     
+def remove11():
+    try: 
+        os.remove("output.jpg")
+        os.remove("sou.jpg")
+        os.remove("0kalu.jpg")
+        os.remove("0para.jpg")
+        os.remove("ocr_gray.jpg")
+        os.remove("cropped.jpg")
+    except: pass  
+if __name__== "__main__" :   
+    remove11()
     menu = Menu(root)
     root.config(menu=menu)
     filemenu = Menu(menu)
