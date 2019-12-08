@@ -10,10 +10,11 @@ import os
 import shutil
 from docx.shared import Inches
 from docx import Document
+from flowchart_written_detect import *
 document = Document()
 thickness = 10
 #to extract text from image
-def extract_text(image,imagename):#variable , name of file
+def extract_text(image,imagename,type1):#variable , name of file
     pytesseract.pytesseract.tesseract_cmd='C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
     # load the image and convert it to grayscale
@@ -23,8 +24,11 @@ def extract_text(image,imagename):#variable , name of file
     # write the grayscale image to disk as a temporary file so we can apply OCR to it
     cv2.imwrite("ocr_gray.jpg", gray)
     # load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
-    text = pytesseract.image_to_string(Image.open(imagename))
+    #text = pytesseract.image_to_string(Image.open(imagename))
     #print(text)
+    if type1=='arrow':
+        return  ''
+    text=rudra('cropped.jpg')
     return text
 #for identifying shapes 
 class ShapeDetector:
@@ -219,8 +223,9 @@ def flowchart(image,outputname):
                 cropped = white2[y:y+h, x:x+w]           
     #            print(extract_text(cropped,'cropped.jpg'))
                 mark=0
-                cv2.putText(white, extract_text(cropped,'cropped.jpg'), (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
-                cv2.putText(white1, extract_text(cropped,'cropped.jpg'), (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
+                text=extract_text(cropped,'cropped.jpg',shape)
+                cv2.putText(white,text, (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
+                cv2.putText(white1,text, (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
                 cnt12=cnt12+1
                 if shape == "rectangle":
                     
