@@ -11,6 +11,7 @@ import glob
 from docx.shared import Inches
 from docx import Document
 import os
+from flowchart_generator import *
 def dell12(num1,output):    
     document = Document()
     
@@ -29,7 +30,7 @@ def dell12(num1,output):
         if(temp>=0):
             continue
         im = Image.open(filename)
-        #print(filename)
+        
         imgwidth, imgheight = im.size
         #print(imgwidth)
         #print(imgheight)
@@ -43,6 +44,8 @@ def dell12(num1,output):
         imgheight/=200
         
         runner.add_picture(filename,width=Inches(imgwidth),height=Inches(imgheight))
+        text=myDict[filename]
+        document.add_paragraph(text)
         #os.remove(filename)
     #output=output.replace('/', '\')    
     document.save(output)

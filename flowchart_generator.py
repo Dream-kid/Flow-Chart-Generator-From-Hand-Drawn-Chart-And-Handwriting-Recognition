@@ -14,6 +14,7 @@ from flowchart_written_detect import *
 document = Document()
 thickness = 10
 #to extract text from image
+myDict = {}
 def extract_text(image,imagename,type1):#variable , name of file
     pytesseract.pytesseract.tesseract_cmd='C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
@@ -124,8 +125,9 @@ def remove11():
     try: 
         os.remove("output.jpg")
     except: pass    
-def copy11(temp):
-    st="flowchart/store/"+temp
+def copy11(temp,text):
+    st="flowchart/store\\"+temp  
+    myDict[st]=text
     shutil.copy("output.jpg",st)
 def edge_cut(outputname):
     img = cv2.imread(outputname) 
@@ -224,7 +226,7 @@ def flowchart(image,outputname):
     #            print(extract_text(cropped,'cropped.jpg'))
                 mark=0
                 text=extract_text(cropped,'cropped.jpg',shape)
-                cv2.putText(white,text, (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
+                cv2.putText(white,'', (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
                 cv2.putText(white1,text, (cX-int(w/4), cY), cv2.FONT_HERSHEY_SIMPLEX,2, (0, 0, 255), 3)
                 cnt12=cnt12+1
                 if shape == "rectangle":
@@ -262,7 +264,7 @@ def flowchart(image,outputname):
                 edge_cut(outputname)
                 
                # runner.add_picture('output.jpg',width=Inches(imgwidth),height=Inches(imgheight)) 
-                copy11(pp)
+                copy11(pp,text)
                 pp="0"+pp
                 
                 #cv2.waitKey(0)
