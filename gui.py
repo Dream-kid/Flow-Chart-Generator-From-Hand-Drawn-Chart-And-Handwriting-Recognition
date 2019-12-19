@@ -43,6 +43,7 @@ def alert_popup(title,message):
     b = Button(root, text="OK", command=root.destroy, width=5)
     b.pack()
 def database():
+   pytesseract.pytesseract.tesseract_cmd='C:\\Program Files\\Tesseract-OCR\\tesseract.exe' 
    str12=''
    try: 
        str12=root.filename
@@ -91,18 +92,15 @@ def database():
             if gender==1:
                 #print('dddd')
                 #print(name1)
-                try:
-                    call1(str12,name1)
-                except:
-                    print('no')
-                try:
-                    im = Image.open(str12)
-                    text = pytesseract.image_to_string(im, lang = 'eng')
-                    f1= open('output/output4.txt',"a")                                      
-                    f1.write(text)
-                    f1.close()   
-                except:
-                    print('no')
+                
+                call1(str12,name1)
+                
+                im = Image.open(str12)
+                text = pytesseract.image_to_string(im, lang = 'eng')
+                f1= open('output/output4.txt',"a")                                      
+                f1.write(text)
+                f1.close()   
+                
                 #print(text)
                 if name1[len(name1)-1] == 'x':
                    # print('ok')
