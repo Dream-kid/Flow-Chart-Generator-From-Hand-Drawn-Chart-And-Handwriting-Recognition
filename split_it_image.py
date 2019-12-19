@@ -33,7 +33,12 @@ def edge_cut(outputname):
 
 # display
                 #cv2.imshow("Cropped and thresholded image", thresh_crop) 
-    cv2.imwrite("0"+outputname,thresh_crop)   
+    adc=2            
+    try:           
+        cv2.imwrite("0"+outputname,thresh_crop)
+    except:
+        abc=3
+        
     
 def crop(infile,temp,output):
     
@@ -54,8 +59,8 @@ def crop(infile,temp,output):
             imgwidth2, imgheight2 = im3.size
            # print(imgheight1 , i)
             #print(imgheight2)
-            if prev==imgheight2 and imgheight2>10:
-                print(i)
+            if prev==imgheight2 and imgheight2>20:
+                #print(i)
                 
                 im13 = Image.open(infile) 
                 width11, height11 = im13.size 
@@ -76,7 +81,8 @@ def crop(infile,temp,output):
                 #im = cv2.imread(str12)                        # Read image
                 #imS = cv2.resize(im, (2060, 740))                    # Resize image
                 #cv2.imshow("output", imS)
-                how(st,output)
+                if i>40:
+                    how(st,output)
                 return 1
             prev=imgheight2 
         except:
@@ -88,6 +94,7 @@ def crop(infile,temp,output):
   
 #if __name__== "__main__" :
 def call1(input1,output):
+    
     open(output,'w').close()
     open('output/output3.txt', 'w').close()
     open('output/output2.txt', 'w').close()
