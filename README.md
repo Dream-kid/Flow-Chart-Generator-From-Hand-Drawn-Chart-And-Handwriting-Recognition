@@ -10,7 +10,7 @@ Early methods consisted in recognizing isolated characters, or in over-segmentin
             4  Design (Data Flow Diagram)
 
  
-     ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/1.png) 
+     ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/1.png)
      
 Figure 1: Flow diagram of Hand-drawn handwriting and flowchart detection system
 
