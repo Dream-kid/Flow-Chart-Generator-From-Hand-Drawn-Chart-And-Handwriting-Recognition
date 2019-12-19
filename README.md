@@ -1,53 +1,4 @@
-Project Report
-![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/2.png)
 
-CSE 3200: System Development Project
-
-
-
-Flow Chart Generator From Hand Drawn Chart And Handwriting Recognition
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Project Team
-
-Shourav Paul (Roll - 1607007)
-
-Soarov Chakraborty (Roll - 1607014)
-
-
-
-Supervised by
-
-Dr. Sk. Mohammad Masudul Ahsan
-
-Professor
-
-Dept. of Computer Science and Engineering
-
-Khulna University of Engineering & Technology
- 
 1	Introduction
 Flow chart generator An AI (image processing) based system can convert hand drawn flow chart into real flowchart which can be edited using Microsoft Word. Handwritten Text Recognition (HTR) system implemented with TensorFlow (TF) and trained on the IAM off-line HTR dataset. This Neural Network (NN) model recognizes the text contained in the images of segmented words as shown in the illustration below. As these word-images are smaller than images of complete text-lines, the NN can be kept small and training on the CPU is feasible. A user-friendly graphical interface is associated with the system to make it simple for the user to operate the system
 2	Objectives
@@ -59,7 +10,8 @@ Early methods consisted in recognizing isolated characters, or in over-segmentin
             4  Design (Data Flow Diagram)
 
  
-                                   
+     ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/1.png) 
+     
 Figure 1: Flow diagram of Hand-drawn handwriting and flowchart detection system
 
 The System consists of three main components -
@@ -76,6 +28,7 @@ Again, the Graphical User Interface (GUI) makes the system interactive for a use
 
 We will build a Neural Network (NN) which is trained on word-images from the IAM dataset. As the input layer (and therefore also all the other layers) can be kept small for word-images, NN-training is feasible on the CPU (of course, a GPU would be better). This implementation is the bare minimum that is needed for HTR using TF. 
  
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/2.png)
 
         	 Fig. 2: Image of word (taken from IAM) and its transcription into digital text.
 We use a NN for our task. It consists of convolutional NN (CNN) 
@@ -88,24 +41,25 @@ layers, recurrent NN (RNN) layers and a final Connectionist Temporal Classificat
           5.1 Model Overview
 
  
-
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/3.png)
 
 Fig. 3: Overview of the NN operations (green) and the data flow through the NN (pink).
 We can also view the NN in a more formal way as a function (see Eq. 1) which maps an   image (or matrix) M of size W×H to a character sequence (c1, c2, …) with a length between 0 and L. As you can see, the text is recognized on character-level, therefore words or texts not contained in the training data can be recognized too (as long as the individual characters get correctly classified).
 
  
+ ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/4.png)
  
 Eq. 1: The NN written as a mathematical function which maps an image M to a character sequence (c1, c2, …).
 
 5.2 Data
 Input: it is a gray-value image of size 128×32. Usually, the images from the dataset do not have exactly this size, therefore we resize it (without distortion) until it either has a width of 128 or a height of 32. Then, we copy the image into a (white) target image of size 128×32. This process is shown in Fig. 4. Finally, we normalize the gray-values of the image which simplifies the task for the NN. Data augmentation can easily be integrated by copying the image to random positions instead of aligning it to the left or by randomly resizing the image.
 
-  
+  ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/5.png)
 
 Fig. 4: Left: an image from the dataset with an arbitrary size. It is scaled to fit the target image of size 128×32, the empty part of the target image is filled with white color.
 
 
- 
+ ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/6.png)
 
 Fig. 5: Top: 256 feature per time-step are computed by the CNN layers. 
 Middle: input image. Bottom: plot of the 32nd feature, which has a high correlation with the occurrence of the character “e” in the image.
@@ -140,7 +94,7 @@ Using such measures we can simply detect the element of the flow-chart.
 The user interface has all the options needed for the administration and other debugging purpose so that, we do not need to edit code for any management.
  
 
-
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/7.png)
 
 Figure 6: Overall user interface view
 
@@ -154,7 +108,7 @@ Primarily when someone will open out project then can either choose to convert h
 
  
 
-
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/8.png)
 
 Fig 7: conversion of flow-chart from hand-drawn image with our system
 
@@ -167,22 +121,25 @@ When someone choose handwriting option then this system will convert it like bel
 
  
 
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/9.png)
 
 Fig 8: conversion of text from hand-drawn image with our system
 
 
 When system task will continue then progress-bar will appear and after that finishing the task a simple notification will be given that the task is finished.
 
- 
+ ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/10.png)
 
             Fig 9: progress-bar
+            
+            ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/11.png)
  
      Fig 10: Complete of conversion 
 
 The overall use case of the total software will be:
 
 
-
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/12.png)
  
 Fig 11: conversion of text from hand-drawn image with our system
 
@@ -194,12 +151,13 @@ Our system can directly send the generated text to word file and save accordingl
 
 
  
-
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/13.png)
 
 Fig 12: Use case of what format to choose when to save a file in our system
 
 
  
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/14.png)
 
 Fig 13: Use case of flow-chart into docx file into our system
  
@@ -230,11 +188,6 @@ The designed algorithm was effectively able to detect the type of flow-chart ele
 8 References
 [1]  Handwritten text recognition in historical documents / von Harald Scheidl Author Scheidl, Harald Thesis advisor Sablatnig, Robert Published Wien, 
 
-[2] ‘Off-line Sinhala Handwriting Recognition using Hidden Markov Models’ , by S. Hewavitharana, H. C. Fernando and N.D. Kodikara, Department of Computer Science, University of Colombo, Colombo, and Sri Lanka Institute of Information Technology, Sri Lanka
-
-[3] ‘OFF-LINE CURSIVE HANDWRITTEN WORD RECOGNITION BASED ON TREE EXTRACTION AND AN OPTIMIZED CLASSIFICATION DISTANCE’, J. R. Rico, Departamento de Lenguajes y Sistemas Informáticos, Universidad de Alicante, E-03071 Alicante. SPAIN. 
-
-[4] ‘An Intelligent Offline Handwriting Recognition System Using Evolutionary Neural Learning Algorithm and Rule Based Over Segmented Data Points’, by Ranadhir Ghosh, School of Information Technology and Mathematical Sciences, University of Ballarat, Australia. Moumita Ghosh, School of Information Technology and Mathematical Sciences, University of Ballarat, Australia
 
 
 
