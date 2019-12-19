@@ -1,4 +1,11 @@
 
+Motivation
+This project is made for the third year second semester System Development(CSE-3200) course.
+       
+   ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/8.png)
+          
+   ![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/project%20images/9.png)
+   
             1	Introduction
 Flow chart generator An AI (image processing) based system can convert hand drawn flow chart into real flowchart which can be edited using Microsoft Word. Handwritten Text Recognition (HTR) system implemented with TensorFlow (TF) and trained on the IAM off-line HTR dataset. This Neural Network (NN) model recognizes the text contained in the images of segmented words as shown in the illustration below. As these word-images are smaller than images of complete text-lines, the NN can be kept small and training on the CPU is feasible. A user-friendly graphical interface is associated with the system to make it simple for the user to operate the system
             
