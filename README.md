@@ -198,7 +198,18 @@ The designed algorithm was effectively able to detect the type of flow-chart ele
  #    8 References
 [1]  Handwritten text recognition in historical documents / von Harald Scheidl Author Scheidl, Harald Thesis advisor Sablatnig, Robert Published Wien, 
 
+# Author
+Soarov Chakraborty, Shourov Paul
+sourovchakraborty420@gmail.com
+Student at Department of Computer Science and Engineering
+Khulna University of Engineering & Technology, Khulna
+Bangladesh
 
+Supervised under
+Dr. Sk. Mohammad Masudul Ahsan
+Professor
+Dept. of Computer Science and Engineering
+Khulna University of Engineering & Technology
 
 
 
