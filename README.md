@@ -206,11 +206,11 @@ Khulna University of Engineering & Technology, Khulna
 Bangladesh
 
 
-Supervised under
-Dr. Sk. Mohammad Masudul Ahsan
-Professor
-Dept. of Computer Science and Engineering
-Khulna University of Engineering & Technology
+Supervised under                                         
+Dr. Sk. Mohammad Masudul Ahsan                                                                                         
+Professor                             
+Dept. of Computer Science and Engineering          
+Khulna University of Engineering & Technology              
 
 
 
