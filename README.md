@@ -1,5 +1,5 @@
 Project Report
-https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/Demo/images/200.jpg
+![alt text](https://github.com/Dream-kid/Flow-Chart-Generator-From-Hand-Drawn-Chart-And-Handwriting-Recognition/blob/master/Demo/images/200.jpg)
 
 CSE 3200: System Development Project
 
