@@ -75,7 +75,7 @@ Input: it is a gray-value image of size 128×32. Usually, the images from the da
 Middle: input image. Bottom: plot of the 32nd feature, which has a high correlation with the occurrence of the character “e” in the image.
 CNN output: Fig. 5 shows the output of the CNN layers which is a sequence of length 32. Each entry contains 256 features. Of course, these features are further processed by the RNN layers, however, some features already show a high correlation with certain high-level properties of the input image: there are features which have a high correlation with characters (e.g. “e”), or with duplicate characters (e.g. “tt”), or with character-properties such as loops (as contained in handwritten “l”s or “e”s).
 
-            5.3 Flow-chart detection
+  #          5.3 Flow-chart detection
 To detect the flow-chart we used open-cv function. Our idea is very simple.  First we choose each element by detecting the contours.                                                                                                                     
 At first our system will initialize the shape name and approximate the contour.
 After that, it computes the bounding box of the contour and use the
@@ -93,13 +93,13 @@ Again, checking  normal square or rectangle.
  Finally  return the name of the shape
 Using such measures we can simply detect the element of the flow-chart.
 
-            5.4 Dataset
+  #          5.4 Dataset
 [IAM Dataset] (http://www.fki.inf.unibe.ch/databases/iam-handwriting-database/download-the-iam-handwriting-database)       
 * [Model1 - word_model.png] Train on WORD unit of dataset.
 * [Model2 - line_model.png] Train on LINE unit of dataset.
-6	Implementation
+# 6	Implementation
 
-            6.1	Graphical User Interface (GUI)
+   #         6.1	Graphical User Interface (GUI)
 
 The user interface has all the options needed for the administration and other debugging purpose so that, we do not need to edit code for any management.
  
