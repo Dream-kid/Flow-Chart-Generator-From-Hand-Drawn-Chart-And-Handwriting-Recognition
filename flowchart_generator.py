@@ -234,6 +234,11 @@ def flowchart(image,outputname):
                     #(x,y) top left corner , (x+w,y+h) bottom right corner
                     draw = cv2.rectangle(white,(x,y),(x+w,y+h),(255,0,0),thickness)
                     draw = cv2.rectangle(white1,(x,y),(x+w,y+h),(255,0,0),thickness)
+                elif shape=="pentagon":
+                    pts = np.array([[cX,cY-int(h/2)],[cX+int(w/4),cY-int(h/2)],[cX+int(w/2),cY-int(h/2)],[cX+int(w/2),cY+int(w/2)],[cX,cY+int(h/2)]], np.int32)
+                    draw = cv2.polylines(white,[pts],True,(255,0,0),thickness)
+                    draw = cv2.polylines(white1,[pts],True,(255,0,0),thickness)
+                    
                 elif shape == "Diamond":
                     pts = np.array([[cX,cY-int(h/2)],[cX+int(w/2),cY],[cX,cY+int(h/2)],[cX-int(w/2),cY]], np.int32)
                     pts = pts.reshape((-1,1,2))
