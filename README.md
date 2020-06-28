@@ -200,7 +200,7 @@ The designed algorithm was effectively able to detect the type of flow-chart ele
 
 # Author
 Soarov Chakraborty, Shourov Paul    
-sourovchakraborty420@gmail.com     
+soarovchakraborty@gmail.com     
 Student at Department of Computer Science and Engineering                                                 
 Khulna University of Engineering & Technology, Khulna                             
 Bangladesh
