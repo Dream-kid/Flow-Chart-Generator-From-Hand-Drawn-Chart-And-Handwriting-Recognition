@@ -1,4 +1,5 @@
 # Project Video : https://www.youtube.com/watch?v=9fOigJRpP88
+# Paper: https://ieeexplore.ieee.org/document/9231033
 # Motivation: 
 This project is made for the third year second semester System Development(CSE-3200) course.
        
